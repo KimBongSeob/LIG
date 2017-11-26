@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+
+
+	<context:annotation-config></context:annotation-config>
+	<context:component-scan base-package="DestinationService"></context:component-scan>
+	<context:component-scan base-package="ConstantRegistrationService"></context:component-scan>
+	<context:component-scan base-package="MyPageService"></context:component-scan>
+	<context:component-scan base-package="LoginService"></context:component-scan>
+	<context:component-scan base-package="MemberManagementService"></context:component-scan>	
+	<context:component-scan base-package="HomePageManagementService"></context:component-scan>
+	<context:component-scan base-package="StatistiquesService"></context:component-scan>
+	<context:component-scan base-package="MemberShipService"></context:component-scan>
+	<context:component-scan base-package="QuestionBoardService"></context:component-scan>
+	<context:component-scan base-package="ScheduleSharingService"></context:component-scan>
+	
+	
+	<context:component-scan base-package="MainController"></context:component-scan>
+	<context:component-scan base-package="DestinationController"></context:component-scan>
+	<context:component-scan base-package="ConstantRegistrationController"></context:component-scan>
+	<context:component-scan base-package="MyPageController"></context:component-scan>
+	<context:component-scan base-package="LoginController"></context:component-scan>
+	<context:component-scan base-package="MemberManagementController"></context:component-scan>
+	<context:component-scan base-package="HomePageManagementController"></context:component-scan>
+	<context:component-scan base-package="StatistiquesController"></context:component-scan>
+	<context:component-scan base-package="MemberShipController"></context:component-scan>
+	<context:component-scan base-package="QuestionBoardController"></context:component-scan>
+	<context:component-scan base-package="ScheduleSharingController"></context:component-scan>
+	
+	
+	
+	<!-- 엑셀다운로드 -->
+	<bean id="beanNameViewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver" p:order="1"/>
+	<bean id="excelDownload" class="MemberManagementView.ExcelDownloadView"/>
+	<bean id="download" class="MemberManagementView.DownloadView"/>
+	
+	<!-- 파일업로드 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	</bean>
+	
+	
+
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/view/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+		<property name="alwaysUseFullPath" value="true" />
+	</bean>
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="alwaysUseFullPath" value="true" />
+	</bean>
+
+
+	<mvc:annotation-driven>
+		<mvc:message-converters>
+			<!-- @ResponseBody로 String 처리할때 한글처리 -->
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>text/html;charset=UTF-8</value>
+					</list>
+				</property>
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+
+
+	<!-- <bean id="jsonView" class="net.sf.json.spring.web.servlet.view.JsonView"> 
+		<property name="contentType" value="application/json;charset=UTF-8" /> </bean> -->
+	<bean id="jsonView" class="net.sf.json.spring.web.servlet.view.JsonView">
+		<property name="contentType" value="text/html;charset=UTF-8" />
+	</bean>
+
+	<mvc:resources location="classpath:css/**" mapping="/css/**"></mvc:resources>
+	<mvc:resources location="classpath:img/**" mapping="/img/**"></mvc:resources>
+	<mvc:resources location="classpath:js/**" mapping="/js/**"></mvc:resources>
+	<mvc:resources location="classpath:fonts/**" mapping="/fonts/**"></mvc:resources>
+
+
+
+</beans>

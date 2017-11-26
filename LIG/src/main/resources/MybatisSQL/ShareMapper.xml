@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="schedulesharing">
+
+	<select id="listSido" resultType="String">
+		select distinct area1 from
+		zipcode order by area1 asc
+	</select>
+
+	<select id="listCity" parameterType="String" resultType="map">
+		select
+		distinct area2 from zipcode
+		where area1 = #{area1} order by area2 asc
+	</select>
+	<select id="select_list" resultType="ScheduleSharingDTO.ScheduleSharingDTO"
+		parameterType="HashMap">
+		select * from share_date where group_id = #{group_id}
+		and rownum = 1 order by day_no
+	</select>
+	<select id="getshare" resultType="Integer">
+		select group_id from share_date
+		group by group_id
+	</select>
+	<select id="getTotalRecord" resultType="Integer" parameterType="String">
+		select distinct group_id from share_date where 
+		subject LIKE
+		'%'||#{searchWord}||'%' or
+		dest_name_1 LIKE '%'||#{searchWord}||'%' or
+		dest_name_2 LIKE '%'||#{searchWord}||'%' or
+		dest_name_3 LIKE
+		'%'||#{searchWord}||'%' or dest_name_4 LIKE '%'||#{searchWord}||'%' or
+		dest_name_5 LIKE '%'||#{searchWord}||'%' or basic_addr_1 LIKE
+		'%'||#{searchWord}||'%' or
+		basic_addr_2 LIKE '%'||#{searchWord}||'%' or
+		basic_addr_3 LIKE '%'||#{searchWord}||'%' or
+		basic_addr_4 LIKE
+		'%'||#{searchWord}||'%' or basic_addr_5 LIKE '%'||#{searchWord}||'%' order by group_id desc
+	</select>
+	<select id="getList" parameterType="hashmap"
+		resultType="ScheduleSharingDTO.ScheduleSharingDTO">
+
+		select *
+		from (select *
+		from(
+		select *
+		from share_date
+		where group_id =
+		#{group_id}
+		<if test="searchWord != null">
+			AND(subject LIKE
+			'%'||#{searchWord}||'%' or
+			dest_name_1 LIKE
+			'%'||#{searchWord}||'%' or dest_name_2 LIKE
+			'%'||#{searchWord}||'%' or
+			dest_name_3 LIKE '%'||#{searchWord}||'%' or dest_name_4 LIKE
+			'%'||#{searchWord}||'%' or
+			dest_name_5 LIKE '%'||#{searchWord}||'%' or
+			basic_addr_1 LIKE
+			'%'||#{searchWord}||'%' or
+			basic_addr_2 LIKE
+			'%'||#{searchWord}||'%' or basic_addr_3 LIKE
+			'%'||#{searchWord}||'%'
+			or
+			basic_addr_4 LIKE '%'||#{searchWord}||'%' or basic_addr_5 LIKE
+			'%'||#{searchWord}||'%')
+		</if>
+		and rownum = 1 order by day_no)share_date)
+
+	</select>
+	<select id="getTotalRecord_all" resultType="Integer"
+		parameterType="HashMap">
+		select distinct group_id from share_date
+		<where>
+			<if test="content_m1 != null">
+				code_content_1 =#{content_m1} or
+				code_content_2=#{content_m1} or code_content_3 =#{content_m1} or
+				code_content_4 =#{content_m1} or code_content_5 =#{content_m1}
+			</if>
+			<if test="area_m1 != null">
+				AND code_area1=#{area_m1} or code_area2 =#{area_m1} or
+				code_area3 =#{area_m1} or code_area4 = #{area_m1} or code_area5
+				=#{area_m1}
+			</if>
+			<if test="area_m2 != null">
+				AND code_sigungu_1 =#{area_m2} or
+				code_sigungu_2=#{area_m2} or code_sigungu_3 = #{area_m2} or
+				code_sigungu_4 =#{area_m2} or code_sigungu_5 =#{area_m2}
+			</if>
+			<if test="searchWord != null">
+				AND(subject LIKE
+				'%'||#{searchWord}||'%' or
+				dest_name_1
+				LIKE '%'||#{searchWord}||'%' or dest_name_2 LIKE
+				'%'||#{searchWord}||'%' or
+				dest_name_3 LIKE '%'||#{searchWord}||'%'
+				or dest_name_4 LIKE
+				'%'||#{searchWord}||'%' or
+				dest_name_5 LIKE
+				'%'||#{searchWord}||'%' or basic_addr_1 LIKE
+				'%'||#{searchWord}||'%'
+				or
+				basic_addr_2 LIKE '%'||#{searchWord}||'%' or basic_addr_3 LIKE
+				'%'||#{searchWord}||'%' or
+				basic_addr_4 LIKE '%'||#{searchWord}||'%'
+				or basic_addr_5 LIKE
+				'%'||#{searchWord}||'%')
+
+			</if>
+		</where>
+	</select>
+
+
+	<select id="getList_all" parameterType="hashmap"
+		resultType="ScheduleSharingDTO.ScheduleSharingDTO">
+		select * from share_date
+		<where>
+			<if test="content_m1 != null">
+				code_content_1 =#{content_m1} or
+				code_content_2=#{content_m1} or code_content_3 =#{content_m1} or
+				code_content_4 =#{content_m1} or code_content_5 =#{content_m1}
+			</if>
+			<if test="area_m1 != null">
+				AND code_area1=#{area_m1} or code_area2 =#{area_m1} or
+				code_area3 =#{area_m1} or code_area4 = #{area_m1} or code_area5
+				=#{area_m1}
+			</if>
+			<if test="area_m2 != null">
+				AND code_sigungu_1 =#{area_m2} or
+				code_sigungu_2=#{area_m2} or code_sigungu_3 = #{area_m2} or
+				code_sigungu_4 =#{area_m2} or code_sigungu_5 =#{area_m2}
+			</if>
+			<if test="searchWord != null">
+				AND(subject LIKE
+				'%'||#{searchWord}||'%' or
+				dest_name_1
+				LIKE '%'||#{searchWord}||'%' or dest_name_2 LIKE
+				'%'||#{searchWord}||'%' or
+				dest_name_3 LIKE '%'||#{searchWord}||'%'
+				or dest_name_4 LIKE
+				'%'||#{searchWord}||'%' or
+				dest_name_5 LIKE
+				'%'||#{searchWord}||'%' or basic_addr_1 LIKE
+				'%'||#{searchWord}||'%'
+				or
+				basic_addr_2 LIKE '%'||#{searchWord}||'%' or basic_addr_3 LIKE
+				'%'||#{searchWord}||'%' or
+				basic_addr_4 LIKE '%'||#{searchWord}||'%'
+				or basic_addr_5 LIKE
+				'%'||#{searchWord}||'%')
+			</if>
+		</where>
+	</select>
+
+	<select id="getDetail" resultType="ScheduleSharingDTO.ScheduleSharingDTO"
+		parameterType="int">
+		select * from share_date where group_id =#{group_id}
+		order by day_no
+	</select>
+
+	<select id="moveDetail" resultType="ScheduleSharingDTO.ScheduleSharingDTO"
+		parameterType="int">
+		select * from share_date where group_id =#{group_id}
+		order by day_no
+	</select>
+	<insert id="insert_ss" parameterType="ScheduleSharingDTO.ScheduleSharingDTO">
+		insert into share_date
+		values(seq_share_date.NEXTVAL,#{group_id},#{mem_id},#{nickname},#{day_no},#{start_date},#{end_date},#{subject},#{share_content},#{dest_id_1},#{dest_id_2},#{dest_id_3},#{dest_id_4},#{dest_id_5},#{dest_name_1},#{dest_name_2},#{dest_name_3},#{dest_name_4},#{dest_name_5},#{basic_addr_1},#{basic_addr_2},#{basic_addr_3},#{basic_addr_4},#{basic_addr_5},#{detail_addr_1},#{detail_addr_2},#{detail_addr_3},#{detail_addr_4},#{detail_addr_5},#{code_content_1},#{code_content_2},#{code_content_3},#{code_content_4},#{code_content_5},#{code_area1},#{code_area2},#{code_area3},#{code_area4},#{code_area5},#{code_sigungu_1},#{code_sigungu_2},#{code_sigungu_3},#{code_sigungu_4},#{code_sigungu_5})
+	</insert>
+	<select id="select_gp_id" resultType="Integer">
+		select max(group_id)
+		group_id from regist_date
+	</select>
+		<delete id="del_item" parameterType="Integer" >
+		delete from share_date where group_id = #{group_id}
+	</delete>
+	<select id="select_gp_id_list" resultType="Integer" >
+		select group_id from share_date where group by group_id
+	</select>
+	
+
+</mapper>

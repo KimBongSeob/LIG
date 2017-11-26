@@ -1,0 +1,69 @@
+/* 페이지 탭 */
+.panel.with-nav-tabs .panel-heading {
+	padding: 5px 5px 0 5x;
+}
+
+.panel.with-nav-tabs .nav-tabs {
+	border-bottom: none;
+}
+
+.panel.with-nav-tabs .nav-justified {
+	margin-bottom: -1px;
+}
+/********************************************************************/
+/*** PANEL DEFAULT ***/
+.with-nav-tabs.panel-default .nav-tabs>li>a, 
+.with-nav-tabs.panel-default .nav-tabs>li>a:hover,
+.with-nav-tabs.panel-default .nav-tabs>li>a:focus {
+	color: #777;
+}
+
+.with-nav-tabs.panel-default .nav-tabs>.open>a, 
+.with-nav-tabs.panel-default .nav-tabs>.open>a:hover,
+.with-nav-tabs.panel-default .nav-tabs>.open>a:focus, 
+.with-nav-tabs.panel-default .nav-tabs>li>a:hover,
+.with-nav-tabs.panel-default .nav-tabs>li>a:focus {
+	color: #777;
+	background-color: #ddd;
+	border-color: transparent;
+}
+
+.with-nav-tabs.panel-default .nav-tabs>li.active>a, 
+.with-nav-tabs.panel-default .nav-tabs>li.active>a:hover,
+.with-nav-tabs.panel-default .nav-tabs>li.active>a:focus {
+	color: #555;
+	background-color: #fff;
+	border-color: #ddd;
+	border-bottom-color: transparent;
+}
+
+/* 이미지업로드 */
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+/* 수정 */
+#img-upload{
+   width:300px;
+}
+#img-upload-load{
+   width:300px;
+}
+
+
+

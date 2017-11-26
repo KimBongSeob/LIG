@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="login">
+	<!-- <select id="log" resultType="LoginDTO.loginDTO"> select * from member 
+		where id = #{id} and pwd = #{pwd} </select> -->
+	<!-- <select id="check" resultType="Integer"> select pwd from member where 
+		id = #{id} </select> -->
+	<select id="log" resultType="LoginDTO.loginDTO">
+		select * from member where mem_id =
+		#{mem_id} and passwd = #{passwd}
+	</select>
+	
+	<select id="count_nomal" resultType="int">
+	update LOGIN_COUNT set nomal_count = nomal_count + 1
+	</select>
+	
+	<select id="count_sns" resultType="int">
+	update LOGIN_COUNT set sns_count = sns_count + 1
+	</select>
+	
+</mapper>

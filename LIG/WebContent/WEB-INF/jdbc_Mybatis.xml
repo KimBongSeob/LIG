@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd">
+
+
+	<context:annotation-config></context:annotation-config>
+
+	<context:property-placeholder location="classpath:db.properties" />
+
+
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="${jdbc.driver}" />
+		<property name="jdbcUrl" value="${jdbc.url}" />
+		<property name="user" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
+
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="mapperLocations" value="classpath:MybatisSQL/*.xml" />
+	</bean>
+	<!--<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate"> 
+		<constructor-arg index="0" ref="sqlSessionFactory" /> </bean> -->
+
+	<bean id="contentDAO" class="DestinationDAO.ContentDAO">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	<bean id="areaDAO" class="DestinationDAO.areaDAO">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	<bean id="catDAO" class="DestinationDAO.catDAO">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	<bean id="contentAreaDAO" class="DestinationDAO.contentAreaDAO">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	<bean id="ConstantRegistrationDAO" class="ConstantRegistrationDAO.ConstantRegistrationDAO">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+
+	<bean id="ScheduleSharingDAO" class="MyPageDAO.ScheduleSharingDAO">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+
+	<bean id="loginDAO" class="LoginDAO.loginDAO">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+
+	<!-- 회원관리 -->
+	<bean id="memManageDao" class="MemberManagementDAO.memManageDao">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+
+	<!-- 파일업로드 -->
+	<bean id="HomePageManagementDAO" class="HomePageManagementDAO.HomePageManagementDAO">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+
+	<!-- 통계 -->
+	<bean id="StatistiquesDAO" class="StatistiquesDAO.StatistiquesDao">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+
+
+	<!-- 회원가입 -->
+	<bean id="memShipDao" class="MemberShipDAO.memShipDao">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+
+	<!-- Q & A 게시판 -->
+	<bean id="QuestionBoardDAO" class="QuestionBoardDAO.QuestionBoardDAO">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+
+
+	<!-- mypage 개인정보 조회 -->
+	<bean id="MyPageDAO" class="MyPageDAO.MyPageDAO">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+
+	<!-- 메인 -> 일정공유 -->
+	<bean id="ScheduleSharingDAO1" class="ScheduleSharingDAO.ScheduleSharingDAO1">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+
+	<!-- mypage -> 일정조회 -->
+	<bean class="EventDAO.EventDAO" id="EventDAO">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+
+
+</beans>

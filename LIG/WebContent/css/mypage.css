@@ -1,0 +1,181 @@
+.nav-tabs { border-bottom: 2px solid #DDD; }
+    .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover { border-width: 0;  }
+    .nav-tabs > li > a { border: none; color: #ffffff;background : rgb(255, 83, 13); }
+        .nav-tabs > li.active > a, .nav-tabs > li > a:hover { border: none;  background : rgb(255, 83, 13); !important; background: #fff; color: rgba(86, 72, 63, 1); }
+        .nav-tabs > li > a::after { content: ""; background : rgb(255, 83, 13); height: 2px; position: absolute; width: 100%; left: 0px; bottom: -1px; transition: all 250ms ease 0s; transform: scale(0); }
+    .nav-tabs > li.active > a::after, .nav-tabs > li:hover > a::after { transform: scale(1); }
+.tab-nav > li > a::after { background: rgb(255, 83, 13) none repeat scroll 0% 0%; color: #fff; }
+.tab-pane { padding: 15px 0; }
+.tab-content{padding:20px}
+.nav-tabs.navthree > li  {width:calc(100%/3); text-align:center;}
+.nav-tabs > li  {width:25%; text-align:center;}
+.card {background: #FFF none repeat scroll 0% 0%; box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3); margin-bottom: 30px; }
+
+@media all and (max-width:724px){
+.nav-tabs > li > a > span {display:none;}	
+.nav-tabs > li > a {padding: 5px 5px;}
+}
+
+
+.mypageDiv{
+	margin-top:100px;text-align:center;display:table-cell;
+}
+.mypageDiv-notmargin{
+	text-align:center;display:table-cell;
+}
+.mypageSubDiv{
+	width:80%; display:inline-block;
+}
+.mypageSubDiv-4{
+	width:40%; display:inline-block;
+}
+.mypageSubDiv-5{
+	width:50%; display:inline-block;
+}
+.mypageSubDiv-6{
+	width:60%; display:inline-block;
+}
+.mypageSubDiv-7{
+	width:70%; display:inline-block;
+}
+.mypageSubDiv-8{
+	width:80%; display:inline-block;
+}
+.mypageSubDiv-auto{
+	margin: auto;
+	display:inline-block;
+}
+    
+
+/* 일정조회 */
+.pop_table {
+   width: 100%;
+   border-collapse: separate;
+   border-spacing: 0;
+   border: none;
+   /* border: 1px solid #444444; */
+   border-bottom: 5px solid rgb(130, 98, 79);
+   color: #000;
+}
+
+.pop_table th {
+   padding: 15px;
+   border: none;
+   border-bottom: 2px solid #FFF;
+   /* background: #FEB337; */
+   /* background: #F94E5B; */
+   background: rgb(255, 83, 13);
+   font-weight: bold;
+   text-align: center;
+   vertical-align: middle;
+   font-size: 20px;
+   color: #ffffff;
+}
+
+.pop_table td {
+   padding: 15px;
+   border: none;
+   border-bottom: 2px solid rgb(130, 98, 79);
+   text-align: center;
+   vertical-align: baseline;
+}
+
+/* .pop_table tbody tr:not (:first-child ):hover {
+   background: rgb(234, 234, 234)
+}
+ */
+.pop_table tr:not(:first-child):hover {
+   background: rgb(234, 234, 234)
+}
+
+.pop_table tr:last-child th, .pop_table tr:last-child td {
+   border-bottom: none;
+}
+
+.a.btn-orange-fill2 {
+   font-size: 18px;
+   display: inline-block;
+   padding: 10px 10px;
+   background: rgb(255, 100, 13);
+   color: rgb(255, 255, 255);
+   -webkit-transition: all 0.3s ease;
+   transition: all 0.3s ease;
+   border-color: #fff;
+   border: 2px solid transparent;
+   cursor: pointer;
+   text-decoration: none;
+   font-weight: bold"
+}
+
+.a.btn-orange-fill2:hover {
+    background: rgb(249, 121, 49);
+    border-color: rgb(255, 100, 13);
+    border: -2px solid transparent;
+    color: rgb(255, 255, 255);
+    font-weight: bold";
+}
+
+.my-chackbox {
+   width: 20px;
+   height: 20px;
+}
+/* ---------------------------- 상세 일정-------------------------------------------- */
+
+.hon_table {
+   width: 100%;
+   border-collapse: separate;
+   border-spacing: 0;
+   border: none;
+   /* border: 1px solid #444444; */
+   border-bottom: 5px solid rgb(130, 98, 79);
+   color: #000;
+}
+
+.hon_table th {
+    padding: 15px;
+    border: none;
+    border-bottom: 2px solid rgb(241, 236, 233);
+    border-right: 2px solid rgb(241, 236, 233);
+    /* background: #FEB337; */
+    /* background: #F94E5B; */
+    background: rgb(240, 240, 240);
+    font-weight: bold;
+    text-align: left;
+    vertical-align: middle;
+    font-size: 17px;
+    color: rgb(130, 98, 79);
+    text-indent: 29px;
+    width: 14%;
+}
+
+/* .hon_table th:last-chlid {
+   border-bottom: 2px solid #ff8000;
+} */
+
+
+.hon_table td {
+   padding: 15px;
+   border: none;
+   border-bottom: 2px solid rgb(241, 236, 233);
+   text-align: left;
+   vertical-align: baseline;
+   text-indent: 30px;
+}
+
+.hon_table td {
+   padding: 15px;
+   border: none;
+   border-bottom: 2px solid rgb(241, 236, 233);
+   text-align: left;
+   vertical-align: baseline;
+   text-indent: 30px;
+}
+
+.hon_table h3{
+   color: rgb(97, 67, 50);
+}
+
+.hon_table h4{
+   color: rgb(130, 98, 79);
+   text-align: center;
+}    

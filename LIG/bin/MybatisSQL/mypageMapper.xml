@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="member">
+	<select id="memberview" resultType="MyPageDTO.MyPageDTO"
+		parameterType="String">
+		select * from member where mem_id=#{mem_id}
+	</select>
+	<update id="memberupdate" parameterType="MyPageDTO.MyPageDTO">
+		update member set hphone=#{hphone},passwd=#{passwd},nickname=#{nickName},email=#{email} where mem_id=#{mem_id}
+	</update>
+	<select id="memberconfirm" parameterType="String" resultType="MyPageDTO.MyPageDTO">
+		select * from member where
+		mem_id=#{mem_id}
+	</select>
+	<delete id="memberdelete" parameterType="MyPageDTO.MyPageDTO">
+		delete from member where
+		mem_id=#{mem_id} and passwd = #{passwd}
+	</delete>
+	
+	<select id="select_nickName" resultType="Integer" parameterType="String">
+		select count(*) from member where upper(nickName) = upper(#{nickName})
+	</select>
+</mapper>

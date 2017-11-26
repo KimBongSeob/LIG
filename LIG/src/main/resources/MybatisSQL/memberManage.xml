@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="memManage">
+
+	<select id="mem_ListNum" resultType="MemberManagementDTO.memManageDto"
+      parameterType="MemberManagementDTO.pageNumDto">            
+   <![CDATA[select * from (select MEM_ID,NICKNAME,EMAIL,GENDER,JUMIN,HPHONE,rownum r from (select * from member where MEM_ID NOT IN ('admin'))) where r >= #{startNum} and r <= #{endNum}]]>
+   </select>
+
+	<select id="mem_List" resultType="MemberManagementDTO.memManageDto">
+      select MEM_ID,NICKNAME,EMAIL,GENDER,JUMIN,HPHONE from member where MEM_ID NOT IN ('admin')
+   </select>
+
+	<delete id="deleteUser" parameterType="String">
+		delete from member where mem_Id = #{mem_Id}
+	</delete>
+
+	<select id="mem_Count" resultType="Integer">
+		select count(*) from member where MEM_ID NOT IN ('admin')
+	</select>
+
+	<select id="mem_Search" resultType="int" parameterType="MemberManagementDTO.pageNumDto">
+		select count (*) from member where
+		<choose>	
+		<when test="val == 'mem_Id'"><![CDATA[upper(mem_Id) like upper('%'||#{search_val}||'%')]]> </when>
+		<when test="val == 'nickName'"><![CDATA[upper(nickName) like upper('%'||#{search_val}||'%')]]> </when>
+		<when test="val == 'hphone'">hphone like <![CDATA['%'||#{search_val}||'%']]> </when>	
+	</choose>
+	</select>
+
+	<select id="mem_ListSearch" resultType="MemberManagementDTO.memManageDto" parameterType="MemberManagementDTO.pageNumDto">
+		<![CDATA[select * from (select mem_Id,nickName,email,gender,jumin,hphone,rownum r from (select * from member) where]]>
+	<choose>	
+		<when test="val == 'mem_Id'"><![CDATA[upper(mem_Id) like upper('%'||#{search_val}||'%'))]]> </when>
+		<when test="val == 'nickName'"><![CDATA[upper(nickName) like upper('%'||#{search_val}||'%'))]]> </when>
+		<when test="val == 'hphone'">hphone like <![CDATA['%'||#{search_val}||'%')]]> </when>	
+	</choose>
+	<![CDATA[where r >= #{startNum} and r <= #{endNum}]]>
+	</select>
+</mapper>
+	

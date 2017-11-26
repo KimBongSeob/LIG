@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="memShip">
+
+	<insert id="memJoin" parameterType="MemberShipDTO.memShipDto">
+		insert into member values ( #{mem_Id}, #{nickName}, #{email}, #{passwd}, #{jumin}, #{hphone}, #{gender})
+	</insert>
+	<select id="select_mem_id" resultType="Integer" parameterType="String">
+		select count(*) from member where upper(mem_id) = upper(#{mem_Id})
+	</select>
+	
+	<select id="select_nickName" resultType="Integer" parameterType="String">
+		select count(*) from member where upper(nickName) = upper(#{nickName})
+	</select>
+
+
+</mapper>

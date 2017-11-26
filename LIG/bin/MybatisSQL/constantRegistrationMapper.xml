@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ConstantRegistration">
+	<insert id="insert_cr" parameterType="ConstantRegistrationDTO.ConstantRegistrationDTO">
+		insert into regist_date values(seq_regist_date.NEXTVAL,#{group_id},#{mem_id},#{subject},#{day_no},#{start_date},#{end_date},#{dest_id_1},#{dest_id_2},#{dest_id_3},#{dest_id_4},#{dest_id_5},#{dest_name_1},#{dest_name_2},#{dest_name_3},#{dest_name_4},#{dest_name_5},#{basic_addr_1},#{basic_addr_2},#{basic_addr_3},#{basic_addr_4},#{basic_addr_5},#{detail_addr_1},#{detail_addr_2},#{detail_addr_3},#{detail_addr_4},#{detail_addr_5},#{code_content_1},#{code_content_2},#{code_content_3},#{code_content_4},#{code_content_5},#{code_area1},#{code_area2},#{code_area3},#{code_area4},#{code_area5},#{code_sigungu_1},#{code_sigungu_2},#{code_sigungu_3},#{code_sigungu_4},#{code_sigungu_5})
+	</insert>
+	<select id="select_gp_id" resultType="Integer">
+		select max(group_id) group_id from regist_date
+	</select>
+</mapper>

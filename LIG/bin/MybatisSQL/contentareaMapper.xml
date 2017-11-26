@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="contentarea">
+	<insert id="insert_comments" parameterType="DestinationDTO.contentAreaDTO">
+		insert into comments values(SEQ_comments.NEXTVAL,#{contentid},#{mem_id},#{nickname}, #{contentval},TO_DATE(#{sdate},'yyyy-mm-dd hh24:mi:ss'))
+	</insert>
+	<select id="select_comments" resultType="DestinationDTO.contentAreaDTO" parameterType="String">
+		select id,contentid,MEM_ID,NICKNAME,contentval,sdate,sdate sub_sdate from comments where contentid=#{contentid} order by sdate asc
+	</select>
+	<select id="select_commentsNonId" resultType="DestinationDTO.contentAreaDTO">
+		select * from comments order by sdate asc
+	</select>
+	<delete id="delete_comments" parameterType="DestinationDTO.contentAreaDTO">
+		delete from comments where id = #{id}
+	</delete>
+</mapper>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="event">
+	<select id="evt" resultType="EventDTO.EventDTO">
+		select distinct group_id,mem_id,subject,start_date,end_date from regist_date where mem_id=#{mem_id} order by Start_date desc
+	</select>
+
+
+	<select id="evtDetail" resultType="EventDTO.EventDTO">
+		select * from regist_date where mem_id=#{mem_id} and group_id=#{group_id} ORDER BY day_no
+	</select>
+	
+	<insert id="shareDateInsert">
+		insert into SHARE_DATE (share_id , MEM_ID, group_id, start_date, end_date,subject, share_content)
+		  VALUES( seq_share_date.nextval, #{mem_id} ,
+ 			#{group_id}, #{start}, #{end},   #{subject}, #{share_content})
+	</insert>
+	
+	<select id="mSharing" resultType="ScheduleSharingDTO.ScheduleSharingDTO"
+		parameterType="int">
+		select * from regist_date where group_id =#{group_id} order by day_no
+	</select>
+	
+	
+	<delete id="evtGroupDelete">
+	
+	delete from regist_date where group_id =#{group_id} and mem_id=#{mem_id}
+		
+	</delete>
+	
+	<select id="MySharing_group_id" resultType="Integer">
+		select max(group_id) group_id from share_date
+	</select>
+	
+	<insert id="insert_ss" parameterType="EventDTO.MyScheduleSharingDTO">
+		insert into share_date values(seq_share_date.NEXTVAL,#{group_id},#{mem_id},#{nickname},#{day_no},#{start_date},#{end_date},#{subject},#{share_content},#{dest_id_1},#{dest_id_2},#{dest_id_3},#{dest_id_4},#{dest_id_5},#{dest_name_1},#{dest_name_2},#{dest_name_3},#{dest_name_4},#{dest_name_5},#{basic_addr_1},#{basic_addr_2},#{basic_addr_3},#{basic_addr_4},#{basic_addr_5},#{detail_addr_1},#{detail_addr_2},#{detail_addr_3},#{detail_addr_4},#{detail_addr_5},#{code_content_1},#{code_content_2},#{code_content_3},#{code_content_4},#{code_content_5},#{code_area1},#{code_area2},#{code_area3},#{code_area4},#{code_area5},#{code_sigungu_1},#{code_sigungu_2},#{code_sigungu_3},#{code_sigungu_4},#{code_sigungu_5})
+	</insert>
+	
+</mapper>

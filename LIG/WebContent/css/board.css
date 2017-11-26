@@ -1,0 +1,57 @@
+
+.a.btn-lightorange-fill {
+   font-size: 18px;
+   display: inline-block;
+   padding: 12px 28px;
+   background: rgb(243, 123, 0);
+   color: rgb(255, 236, 224);
+   -webkit-transition: all 0.3s ease;
+   transition: all 0.3s ease;
+   border-color: #fff;
+   border: 2px solid transparent;
+   cursor:pointer;
+   text-decoration:none;
+}
+.a.btn-brown-fill {
+   font-size: 18px;
+   display: inline-block;
+   padding: 12px 28px;
+   background : rgb(138, 100, 53);
+   color: rgb(255, 236, 224);
+   -webkit-transition: all 0.3s ease;
+   transition: all 0.3s ease;
+   border-color: #fff;
+   border: 2px solid transparent;
+   cursor:pointer;
+   text-decoration:none;
+}
+.a.btn-gray-fill {
+   font-size: 18px;
+   display: inline-block;
+   padding: 12px 28px;
+   background : rgb(158, 145, 126);
+   color: rgb(255, 236, 224);
+   -webkit-transition: all 0.3s ease;
+   transition: all 0.3s ease;
+   border-color: #fff;
+   border: 2px solid transparent;
+   cursor:pointer;
+   text-decoration:none;
+}
+.a.btn-darkorange-fill {
+   font-size: 18px;
+   display: inline-block;
+   padding: 12px 28px;
+   background : rgb(255, 106, 0);
+   color: rgb(255, 236, 224);
+   -webkit-transition: all 0.3s ease;
+   transition: all 0.3s ease;
+   border-color: #fff;
+   border: 2px solid transparent;
+   cursor:pointer;
+   text-decoration:none;
+}
+
+a:hover{
+	text-decoration: none;
+}

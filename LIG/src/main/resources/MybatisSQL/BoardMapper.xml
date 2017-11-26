@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="board">
+
+<!-- 제목글작성 -->
+<insert id="insertBoard" parameterType="QuestionBoardDTO.QuestionBoardDTO">
+insert into board values(#{board_num},#{writer},#{subject},#{content},#{regdate},board_refseq.NEXTVAL,#{re_step},#{re_level})
+</insert>
+<!-- ref는 board_num과 같다. 글하나당 하나의 그룹. re_step과 re_level은 제목글일땐 아무설정하지않으므로 컨트롤러에서 지정한 기본값인 0으로 지정된다. -->
+
+<!-- 답변글 작성 -->
+<insert id="insertreplyboard" parameterType="QuestionBoardDTO.QuestionBoardDTO">
+insert into board values(#{board_num},#{writer},#{subject},#{content},#{regdate},#{ref},#{re_step},#{re_level})
+</insert>
+
+<!-- 전체 글 수 구하기 -->
+<select id="getCount" resultType="int">
+select count(*) from board
+</select>
+
+<!-- 마이페이지 전체 글 수 구하기 -->
+<select id="getmyCount" parameterType="String" resultType="int">
+select count(*) from board where writer=#{nickname} and re_step=0 and re_level=0
+</select>
+
+<!-- 제일마지막글번호 가져오기 -->
+ <select id="maxboardnum" parameterType="QuestionBoardDTO.QuestionBoardDTO" resultType="int">
+select max(board_num) from board
+</select>
+
+<select id="maxlevelname" resultType="MyPageDTO.BoardAnswerDTO" parameterType="int">
+select writer,board_num from board where ref=#{ref} and re_level IN (select MAX(Re_level) from board where ref=#{ref}) and  re_step IN(select MAX(re_step) from board where ref=#{ref})
+
+</select>
+
+<!-- 답글 step,level수정  -->
+<update id="updaterelevelboard" parameterType="QuestionBoardDTO.QuestionBoardDTO">
+update board set re_step=re_step+1 where ref=#{ref} and re_step > #{re_step}
+</update>
+
+<!-- 목록 보기 -->
+<select id="selectBoardlist" parameterType="map" resultType="QuestionBoardDTO.QuestionBoardDTO">
+select board_num,writer,subject,content,regdate,ref,re_step,re_level,r from
+(select board_num,writer,subject,content,regdate,ref,re_step,re_level,rownum r from
+(select board_num,writer,subject,content,regdate,ref,re_step,re_level from board order by ref desc,re_step asc)
+order by ref desc,re_step asc)where r &gt;=#{startRow} and r &lt;=#{endRow}
+</select>        
+
+<!-- 마이페이지 게시판목록 보기 -->
+<select id="selectmyBoardlist" parameterType="map" resultType="QuestionBoardDTO.QuestionBoardDTO">
+select board_num,writer,subject,content,regdate,ref,re_step,re_level,r from
+(select board_num,writer,subject,content,regdate,ref,re_step,re_level,rownum r from
+(select * from board where writer=#{nickname} and re_step=0 and re_level=0)
+order by ref desc,re_step asc)where r &gt;=#{startRow} and r &lt;=#{endRow}
+</select>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+
+<!-- 상세보기 -->
+<select id="selectBoardDetail" parameterType="int" resultType="QuestionBoardDTO.QuestionBoardDTO">
+select * from board where board_num=#{num}
+</select>
+
+<!-- 수정하기 -->
+<update id="updatearticle" parameterType="QuestionBoardDTO.QuestionBoardDTO">
+update board set subject=#{subject},content=#{content} where board_num=#{board_num} 
+</update>
+
+<!-- 삭제하기 -->
+<delete id="deletearticle" parameterType="int">
+delete from board where board_num=#{num}
+</delete>
+</mapper>

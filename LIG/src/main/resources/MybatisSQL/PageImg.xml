@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="File">
+
+	<update id="updateFile1" parameterType="HomePageManagementDTO.PageImgDTO">
+	update IMG_UPLOAD set filename = #{filename}, realpath = #{realpath} where NO = '1'
+	</update>
+	
+	<update id="updateFile2" parameterType="HomePageManagementDTO.PageImgDTO">
+	update IMG_UPLOAD set filename = #{filename}, realpath = #{realpath} where NO = '2'
+	</update>
+	
+	<update id="updateFile3" parameterType="HomePageManagementDTO.PageImgDTO">
+	update IMG_UPLOAD set filename = #{filename}, realpath = #{realpath} where NO = '3'
+	</update>
+	
+	<select id="fileList" resultType="HomePageManagementDTO.PageImgDTO">
+		select * from IMG_UPLOAD order by no
+	</select>
+	
+	<update id="updateLogo1" parameterType="HomePageManagementDTO.LogoImgDTO">
+	update IMG_LOGO set filename = #{filename}, realpath = #{realpath} where NO = '1'
+	</update>
+	
+	<update id="updateLogo2" parameterType="HomePageManagementDTO.LogoImgDTO">
+	update IMG_LOGO set filename = #{filename}, realpath = #{realpath} where NO = '2'
+	</update>
+	
+	<select id="logoList" resultType="HomePageManagementDTO.LogoImgDTO">
+		select * from IMG_LOGO order by no
+	</select>
+	
+</mapper>
